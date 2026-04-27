@@ -19,7 +19,7 @@
 
 ## Installation
 
-1. Go to the [Releases](https://github.com/devreonid/neofsm-validator/releases/tag/v1.0.0) page.
+1. Go to the [Releases](https://github.com/devreonid/NeoFSM/releases/tag/v1.0.0) page.
 2. Download `NeoFSM_v1.0.0_win-x64.exe` (Self-contained).
 3. Run the executable directly. No additional .NET runtime installation is required!
 
