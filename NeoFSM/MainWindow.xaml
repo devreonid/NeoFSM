@@ -1,0 +1,98 @@
+﻿<Window x:Class="NeoFSM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NeoFSM" Height="450" Width="550" 
+        Icon="neofsm.ico"
+        WindowStartupLocation="CenterScreen" Background="#F3F3F3">
+
+    <Window.Resources>
+        <Style x:Key="ModernSwitch" TargetType="CheckBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid x:Name="BackgroundGrid" Width="38" Height="20">
+                                <Border x:Name="Track" Background="Gray" CornerRadius="10" BorderThickness="1"/>
+                                <Ellipse x:Name="Thumb" Fill="White" Width="14" Height="14" HorizontalAlignment="Left" Margin="3,0,0,0">
+                                    <Ellipse.RenderTransform>
+                                        <TranslateTransform X="0"/>
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                            </Grid>
+                            <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Track" Property="Background" Value="#FF0078D7"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Thumb" 
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" 
+                                                             To="18" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Thumb" 
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" 
+                                                             To="0" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20">
+            <CheckBox x:Name="ThemeToggle" Content="Dark Mode" Style="{StaticResource ModernSwitch}" 
+                      Click="ThemeToggle_Click" FontSize="11" Foreground="Gray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Margin="30,50,30,0">
+            <TextBlock Text="FSM Language Validator" FontSize="22" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBlock Text="L = { x ∈ (0 + 1)⁺ | ends with 1 &amp; no '00' }" FontSize="12" Foreground="Gray" Margin="0,0,0,20"/>
+
+            <TextBlock Text="Input Binary String:" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
+            <TextBox x:Name="InputTextBox" FontSize="18" Padding="10" BorderThickness="1.5" 
+                     TextChanged="InputTextBox_TextChanged" VerticalContentAlignment="Center"/>
+
+            <StackPanel x:Name="ResultPanel" Visibility="Collapsed" Margin="0,25,0,0">
+                <Border x:Name="StatusBorder" CornerRadius="5" Padding="15">
+                    <StackPanel>
+                        <TextBlock x:Name="StatusTitle" Text="RESULT" FontSize="11" FontWeight="Bold" Margin="0,0,0,2"/>
+                        <TextBlock x:Name="StatusResult" Text="ACCEPTED" FontSize="24" FontWeight="Black"/>
+
+                        <Separator Margin="0,10" Opacity="0.3"/>
+
+                        <TextBlock Text="Transition Trace:" FontSize="11" FontWeight="Bold" Opacity="0.7"/>
+                        <TextBlock x:Name="RouteDisplay" Text="S → B" FontSize="14" FontFamily="Consolas" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,15">
+            <TextBlock FontSize="12" FontWeight="SemiBold" Foreground="Gray" Opacity="0.8" HorizontalAlignment="Center">
+                <Run Text="NeoFSM"/>
+                <Run x:Name="AppVersionRun" Text="v1.0.0" Foreground="#FF0078D7"/> 
+                <Run Text=" © 2026 | Engineered by Team 14"/>
+            </TextBlock>
+            <TextBlock Text="Raziq Danish Safaraz • Danish Faiq Ibad Yuadi • Rafa Huga Nirando" 
+                       FontSize="11" FontWeight="Normal" Foreground="Gray" Opacity="0.6" 
+                       HorizontalAlignment="Center" Margin="0,2,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
